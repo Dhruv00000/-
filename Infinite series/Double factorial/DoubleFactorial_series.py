@@ -1,9 +1,17 @@
 from math import pi, log10, floor, factorial
 
-def double_factorial(n: int):
-    return double_factorial(n - 2) * n if n not in [0, 1] else 1
+# def double_factorial(n: int):
+#     return double_factorial(n - 2) * n if n not in [0, 1] else 1
 # def factorial(n: int):
 #     return factorial(n - 1) * n if n != 0 else 1
+
+def double_factorial_alt(n: int):
+
+    result: int = 1
+
+    for i in range(n, -1, -2):
+        if i in [0, 1]: return result
+        else: result *= i
 
 k: int = 0
 approximation: float = 0
@@ -11,8 +19,7 @@ previous: float = 0
 
 while True:
 
-    try: approximation += 2 * (factorial(k) / double_factorial(2*k + 1))
-    except RecursionError: break # maximum recursion depth = 999. But that does not matter because this series converges much before this depth is hit.
+    approximation += 2 * (factorial(k) / double_factorial_alt(2*k + 1))
 
     print(f"\nIternation {k}")
     print(f"Approximation = {approximation}")
@@ -24,7 +31,9 @@ while True:
 
     deviation: float = approximation - previous
 
-    if deviation == 0: print("Negligible deviation")
+    if deviation == 0: 
+        print("Negligible deviation\n")
+        break
     else: print(f"Deviation from previous iteration: {approximation - previous}")
 
     previous = approximation
