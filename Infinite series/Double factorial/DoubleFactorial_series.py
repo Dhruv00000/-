@@ -20,8 +20,10 @@ previous: float = 0
 while True:
 
     approximation += 2 * (factorial(k) / double_factorial_alt(2*k + 1))
+    # approximation += pow(2, k + 1) * pow(factorial(k), 2) / factorial(2*k + 1)
+    # This is another form of the algorithm, but it is slower and does not yeild any better approximations.
 
-    print(f"\nIternation {k}")
+    print(f"\nIternation {k + 1}")
     print(f"Approximation = {approximation}")
 
     accuracy: int = floor(abs(log10(abs(approximation - pi)))) - 1
