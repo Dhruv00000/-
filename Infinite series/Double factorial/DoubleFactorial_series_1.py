@@ -20,8 +20,6 @@ k: int = 0
 approximation: float = 0
 previous: float = 0
 
-e = perf_counter()
-
 while True:
 
     approximation += 2 * Decimal(factorial(k) / double_factorial(2*k + 1))
