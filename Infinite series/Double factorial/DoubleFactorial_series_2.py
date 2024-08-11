@@ -26,7 +26,7 @@ while True:
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")
 
-    error: int = abs(approximation - pi)
+    error: Decimal = abs(approximation - pi)
     for i in range(46): # log10(error) kept giving me problems so I just wrote my own makeshift log10 algorithm.
         
         error *= 10
