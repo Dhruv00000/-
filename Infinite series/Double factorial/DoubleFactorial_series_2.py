@@ -27,7 +27,7 @@ while True:
     print(f"Approximation = {approximation}")
 
     error: int = abs(approximation - pi)
-    for i in range(48): # log10(error) kept giving me problems so I just wrote my own makeshift log10 algorithm.
+    for i in range(46): # log10(error) kept giving me problems so I just wrote my own makeshift log10 algorithm.
         
         error *= 10
 
