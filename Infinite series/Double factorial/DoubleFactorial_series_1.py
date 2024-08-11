@@ -28,14 +28,10 @@ while True:
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")
 
-    error: Decimal = abs(approximation - pi)
-    for i in range(48): # log10(error) kept giving me problems so I just wrote my own makeshift log10 algorithm.
-        
-        error *= 10
-
-        if error >= 1:
-            if i != 0: print (f"{i - 1} accurate decimal places")
-            else: print("no accurate decimal places")
+    for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
+        if char != str(approximation)[i]:
+            if i < 2: print("No accurate decimal places")
+            else: print(f"{i - 2} accurate decimal places")
             break
 
     deviation: float = approximation - previous
@@ -43,7 +39,7 @@ while True:
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
         break
-    else: print(f"Deviation from previous iteration: {approximation - previous}")
+    elif deviation != approximation: print(f"Deviation from previous iteration: {approximation - previous}") # this if-statement prevents a deviation from being shown during the first iteration.
 
     previous = approximation
     k += 1
