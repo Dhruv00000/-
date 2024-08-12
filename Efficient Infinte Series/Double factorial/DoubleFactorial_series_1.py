@@ -21,7 +21,9 @@ previous: float = 0
 
 while True:
 
-    approximation += (3 * Decimal(pow(3, 1/2)) * factorial(k)) / (pow(2, k) * double_factorial(2*k + 1) * 2)
+    approximation += 2 * Decimal(factorial(k) / double_factorial(2*k + 1))
+    # approximation += Decimal(pow(2, k + 1) * pow(factorial(k), 2) / factorial(2*k + 1))
+    # This is another form of the algorithm, but it is slower and does not yeild any better approximations.
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")
@@ -29,7 +31,7 @@ while True:
     for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
         if char != str(approximation)[i]:
             if i < 2: print("No accurate decimal places")
-            else: print(f"{i - 2} accurate decimal places")
+            else: print(f"{i - 2} accurate decimal place(s)")
             break
 
     deviation: float = approximation - previous

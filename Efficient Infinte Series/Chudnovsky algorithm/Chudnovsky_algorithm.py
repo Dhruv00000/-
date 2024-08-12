@@ -1,4 +1,4 @@
-# TODO: Implement the binary splitting optimization (check the wikipedia page for the Chudnovsky algorithm) for this algorithm.
+# TODO: Implement the binary splitting optimization for this algorithm.
 from decimal import Decimal
 
 def factorial(n: int):
@@ -21,7 +21,7 @@ while True:
     for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
         if char != str(approximation)[i]:
             if i < 2: print("No accurate decimal places")
-            else: print(f"{i - 2} accurate decimal places")
+            else: print(f"{i - 2} accurate decimal place(s)")
             break
 
     deviation: float = approximation - previous
