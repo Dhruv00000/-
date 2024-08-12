@@ -6,8 +6,8 @@ def factorial(n: int):
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
 
 k: int = 0
-approximation: float = 0
-previous: float = 0
+approximation: Decimal = 0
+previous: Decimal = 0
 
 while True:
 
@@ -22,7 +22,7 @@ while True:
             else: print(f"{i - 2} accurate decimal place(s)")
             break
 
-    deviation: float = approximation - previous
+    deviation: Decimal = approximation - previous
 
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
