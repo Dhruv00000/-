@@ -15,7 +15,6 @@ except ValueError: n = "a" # Setting 'n' to a non-integer ensures that the below
 
 def Bernoulli(num: int):
     if num == 0: return 1
-    elif num == 1: return 1/2
 
     result: float = sum(
         (Bernoulli(l) * factorial(num))
