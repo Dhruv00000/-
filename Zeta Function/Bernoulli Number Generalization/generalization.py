@@ -3,7 +3,7 @@ from decimal import Decimal
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
 
 k: int = 1
-approximationExponentiated: Decimal = 0
+approximationExponentiated: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 
@@ -32,7 +32,7 @@ if isinstance(n, int) and n != 0 and n > 0:
             break
         approximation = Decimal(pow(approximationExponentiated, 1 / (2*n)))
 
-        print(f"\nIteration {k + 1}")
+        print(f"\nIteration {k}")
         print(f"Approximation = {approximation}")
 
         for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk

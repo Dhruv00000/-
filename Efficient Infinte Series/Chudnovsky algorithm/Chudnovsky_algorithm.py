@@ -7,13 +7,14 @@ def factorial(n: int):
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
 
 k: int = 0
-approximationInverted: Decimal = 0
+approximationInverted: float = 0
+approximation: Decimal = 0
 previous: Decimal = 0
 
 while True:
 
     approximationInverted += 12 * (pow(-1, k) * factorial(6*k) * (545140134*k + 13591409)) / (factorial(3*k) * pow(factorial(k), 3) * pow(640320, (3*k + 3/2)))
-    approximation: Decimal = Decimal(1 / approximationInverted)
+    approximation = Decimal(1 / approximationInverted)
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")
