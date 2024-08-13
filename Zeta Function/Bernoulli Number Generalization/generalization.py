@@ -1,4 +1,3 @@
-# TODO: Replace the Bernoulli numbers dictionary with an algorithm that generates bernoulli numbers (and subsewuently remove the restriction that n ≤ 10).
 from decimal import Decimal
 
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
@@ -13,19 +12,6 @@ def factorial(n: int):
 
 try: n: int = int(input("Enter a value for 'n': "))
 except ValueError: n = "a" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
-
-# Bernoulli: dict = {
-#     "2": 1/6,
-#     "4": -1/30,
-#     "6": 1/42,
-#     "8": -1/30,
-#     "10": 5/66,
-#     "12": -691/2730,
-#     "14": 7/6,
-#     "16": -3617/510,
-#     "18": 43867/798,
-#     "20": -174611/330
-# }
 
 def Bernoulli(num: int):
     if num == 0: return 1
