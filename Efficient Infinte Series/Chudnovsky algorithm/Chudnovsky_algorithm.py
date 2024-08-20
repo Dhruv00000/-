@@ -1,4 +1,3 @@
-# TODO: Implement the binary splitting optimization for this algorithm.
 from decimal import Decimal
 from time import perf_counter
 
@@ -12,7 +11,7 @@ approximationInverted: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
-startingTime: float = perf_counter()
+totalComputationTime: float = 0
 
 while True:
 
@@ -33,6 +32,7 @@ while True:
             break
 
     print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
+    totalComputationTime += iterationEndTime - iterationStartTime
 
     deviation: Decimal = approximation - previous
     if deviation == 0: 
@@ -43,6 +43,4 @@ while True:
     previous = approximation
     k += 1
 
-terminationTime: float = perf_counter()
-
-print(f"\n\nCalculated {finalAccuracy} correct decimal places in {terminationTime - startingTime} seconds over {k + 1} iterations.\n")
+print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k + 1} iterations.\n")

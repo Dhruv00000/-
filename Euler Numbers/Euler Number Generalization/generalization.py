@@ -9,6 +9,7 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 overflowed: bool = False
+totalComputationTime: float = 0
 
 def factorial(n: int):
     return factorial(n - 1) * n if n != 0 else 1
@@ -32,8 +33,6 @@ def Euler_2k(num: int):
     return result
 
 if isinstance(k, int) and k >= 0:
-    startingTime: float = perf_counter()
-
     while True:
         try:
             iterationStartTime: float = perf_counter()
@@ -58,6 +57,7 @@ if isinstance(k, int) and k >= 0:
                 break
 
         print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
+        totalComputationTime += iterationEndTime - iterationStartTime
 
         deviation: Decimal = approximation - previous
         if deviation == 0: 
@@ -71,7 +71,4 @@ if isinstance(k, int) and k >= 0:
 else:
     print("\nn must be a whole number.\n")
 
-if not overflowed:
-    terminationTime: float = perf_counter()
-
-    print(f"\n\nCalculated {finalAccuracy} correct decimal places in {terminationTime - startingTime} seconds and {k + 1} iterations.\n")
+if not overflowed: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
