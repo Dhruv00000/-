@@ -32,7 +32,8 @@ def Euler_2k(num: int):
 
     return result
 
-if isinstance(k, int) and k >= 0:
+flag: bool = isinstance(k, int) and k >= 0
+if flag:
     while True:
         try:
             iterationStartTime: float = perf_counter()
@@ -71,4 +72,4 @@ if isinstance(k, int) and k >= 0:
 else:
     print("\nn must be a whole number.\n")
 
-if not overflowed: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
+if not overflowed and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")

@@ -27,7 +27,8 @@ def Bernoulli(num: int):
     )
     return 1 - result
 
-if isinstance(n, int) and n != 0 and n > 0:
+flag: bool = isinstance(n, int) and n != 0 and n > 0
+if flag:
     while True:
         try:
             iterationStartTime: float = perf_counter()
@@ -66,4 +67,4 @@ if isinstance(n, int) and n != 0 and n > 0:
 else:
     print("\nn must be a positive integer.\n")
 
-if not overflowed: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")
+if not overflowed and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")

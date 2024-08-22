@@ -9,8 +9,16 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+coefficients: list = []
+
+# def GregoryCoeffecient(num: int):
+#     if num == 1 : return 1/2
+
+#     result: float = 0 - sum(GregoryCoeffecient(k) / (num - k + 1) for k in range(1, num))
+#     return result + (1 / (num + 1))
 
 def GregoryCoeffecient(num: int):
+    global coefficients
     if num == 1 : return 1/2
 
     result: float = 0 - sum(GregoryCoeffecient(k) / (num - k + 1) for k in range(1, num))

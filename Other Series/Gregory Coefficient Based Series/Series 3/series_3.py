@@ -9,11 +9,13 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+Coeffecients: list = []
 
 def GregoryCoeffecient(num: int):
     if num == 1 : return 1/2
 
-    result: float = 0 - sum(GregoryCoeffecient(k) / (num - k + 1) for k in range(1, num))
+    result: float = 0 - sum(Coeffecients[k + 1] / (num - k + 1) for k in range(1, num))
+    if result + (1 / (num + 1)) not in Coeffecients: Coeffecients += result + (1/ (num + 1))
     return result + (1 / (num + 1))
 
 while True:
