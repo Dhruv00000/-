@@ -1,30 +1,40 @@
 from decimal import Decimal
-from time import perf_counter
+from time import perf_counter, sleep
 
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
 
-n: int = 0
-approximationIntermediate: float = 0
+n: int = 1
+approximationSquared: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-# coefficients: list = [1/2]
+alternateTerms: list = [1, 3]
 
-def GregoryCoeffecient(num: int):
-    if num == 1 : return 1/2
 
-    result: float = 0 - sum(GregoryCoeffecient(k) / (num - k + 1) for k in range(1, num))
-    return result + (1 / (num + 1))
+def fibonacci_2n(num: int):
+
+    if num == 1: return 1
+    if num == 2: return 3
+
+    result: int = 3 * alternateTerms[1] - alternateTerms[0]
+
+    alternateTerms.pop(0)
+    alternateTerms.append(result)
+
+    return result
+
+def factorial(n: int):
+    return factorial(n - 1) * n if n != 0 else 1
 
 while True:
 
     iterationStartTime: float = perf_counter()
-    (approximationIntermediate) += pow(-1, n) * (GregoryCoeffecient(3*n + 1) + GregoryCoeffecient(3*n + 2))
-    approximation = Decimal(pow(3, 1/2) / approximationIntermediate)
+    approximationSquared += (fibonacci_2n(n) * 25 * pow(5, 1/2) * pow(factorial(n), 2)) / (pow(n, 2) * 4 * factorial(2 * n))
+    approximation = Decimal(pow(approximationSquared, 1/2))
     iterationEndTime: float = perf_counter()
 
-    print(f"\nIteration {n + 1}")
+    print(f"\nIteration {n}")
     print(f"Approximation = {approximation}")
 
     for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
@@ -47,4 +57,4 @@ while True:
     previous = approximation
     n += 1
 
-print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
+print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n} iterations.\n")
