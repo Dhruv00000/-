@@ -1,23 +1,7 @@
 from decimal import Decimal
 from time import perf_counter
 
-# def epsilon(num: int):
-
-#     prime: bool = True
-#     primeFactorCount = 0
-
-#     for primeFactorCandidate in range(2, num + 1):
-#         for potentialDivisor in range(2, primeFactorCandidate + 1):
-#             if primeFactorCandidate % potentialDivisor == 0 and primeFactorCandidate != potentialDivisor:
-#                 prime = False
-
-
-#         if prime and num % primeFactorCandidate == 0:
-#             primeFactorCount += 1
-
-#     return primeFactorCount
-
-def epsilonAlt(n):
+def epsilon(n):
     PrimeFactorCount: int = 0
 
     # if n % 2 == 0: PrimeFactorCount += 1
@@ -29,39 +13,18 @@ def epsilonAlt(n):
 
     return PrimeFactorCount
 
-# def epsilon3(N):
-#     primeFactorsCount: int = 0
-
-
-#     if N % 2 == 0:
-#         primeFactorsCount += 1
-#     while N % 2 == 0:
-#         N = N // 2
-#         if N == 1:
-#             return primeFactorsCount
-#     for factor in range(3, N + 1, 2):
-#         if N % factor == 0:
-#             primeFactorsCount += 1
-#             while N % factor == 0:
-#                 N = N // factor
-#                 if N == 1:
-#                     return primeFactorsCount
-
-for i in range(2, 21): print(epsilonAlt(i))
-
 pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
-e: float = 2.7182818284590452
 
 k: int = 1
 approximation: Decimal = 0
-previous: Decimal = 3.14
+previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 
 while True:
 
     iterationStartTime: float = perf_counter()
-    approximation += pow(-1, epsilonAlt(k)) / k
+    approximation += pow(-1, epsilon(k)) / k
     iterationEndTime: float = perf_counter()
 
     print(f"\nIteration {k}")
@@ -78,11 +41,11 @@ while True:
     print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
     totalComputationTime += iterationEndTime - iterationStartTime
 
-    deviation: Decimal = approximation - Decimal(previous)
+    deviation: Decimal = approximation - previous
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
         break
-    elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
+    elif deviation != approximation: print(f"Deviation from previous iteration: {approximation - previous}") # this if-statement prevents a deviation from being shown during the first iteration.
 
     previous = approximation
     k += 1

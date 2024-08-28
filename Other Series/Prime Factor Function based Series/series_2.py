@@ -1,14 +1,14 @@
 from decimal import Decimal
 from time import perf_counter
 
-def epsilonAlt(n):
+def epsilon(n):
     PrimeFactorCount: int = 0
 
     # if n % 2 == 0: PrimeFactorCount += 1
     while n % 2 == 0: n = n // 2
 
     for i in range(3, n + 1, 2):
-        if n % i == 0 and ((i - 1) % 4 == 0): PrimeFactorCount += 1
+        if n % i == 0 and ((i - 3) % 4 == 0): PrimeFactorCount += 1
         while n % i== 0: n = n // i
 
     return PrimeFactorCount
@@ -24,7 +24,7 @@ totalComputationTime: float = 0
 while True:
 
     iterationStartTime: float = perf_counter()
-    approximation += pow(-1, epsilonAlt(k)) / k
+    approximation += 2 * pow(-1, epsilon(k)) / k
     iterationEndTime: float = perf_counter()
 
     print(f"\nIteration {k}")
