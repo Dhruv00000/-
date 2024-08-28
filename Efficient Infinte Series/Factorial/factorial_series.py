@@ -36,7 +36,7 @@ while True:
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
         break
-    elif deviation != approximation: print(f"Deviation from previous iteration: {approximation - previous}") # this if-statement prevents a deviation from being shown during the first iteration.
+    elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
 
     previous = approximation
     k += 1
