@@ -8,14 +8,14 @@ approximationExponentiated: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
-overflowed: bool = False
+terminated: bool = False
 totalComputationTime: float = 0
 
 def factorial(n: int):
     return factorial(n - 1) * n if n != 0 else 1
 
 try: n: int = int(input("Enter a value for 'n': "))
-except ValueError: n = "a" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
+except ValueError: n = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
 
 def Bernoulli(num: int):
     if num == 0: return 1
@@ -35,7 +35,7 @@ if flag:
             approximationExponentiated += pow(-1, n + 1) * (2 * factorial(2*n)) / (pow(k, 2*n) * pow(2, 2*n) * Bernoulli(2*n))
         except (OverflowError, RecursionError) as e:
             print("\nThe entered value is too large to handle.\n")
-            overflowed = True
+            terminated = True
             break
 
         approximation = Decimal(pow(approximationExponentiated, 1 / (2*n)))
@@ -67,4 +67,4 @@ if flag:
 else:
     print("\nn must be a positive integer.\n")
 
-if not overflowed and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")
+if not terminated and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")

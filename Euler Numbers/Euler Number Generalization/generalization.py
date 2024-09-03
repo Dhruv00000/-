@@ -8,14 +8,14 @@ approximationExponentiated: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
-overflowed: bool = False
+terminated: bool = False
 totalComputationTime: float = 0
 
 def factorial(n: int):
     return factorial(n - 1) * n if n != 0 else 1
 
 try: k: int = int(input("Enter a value for 'k': "))
-except ValueError: k = "a" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
+except ValueError: k = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
 
 def Euler_2k(num: int):
 
@@ -37,10 +37,10 @@ if flag:
     while True:
         try:
             iterationStartTime: float = perf_counter()
-            approximationExponentiated += (pow(-1, n-k) * factorial(2*k) * pow(2, 2*k + 2)) / (pow(2*n + 1, 2*k + 1) * Euler_2k(k))
+            approximationExponentiated += (pow(-1, n - k) * factorial(2*k) * pow(2, 2*k + 2)) / (pow(2*n + 1, 2*k + 1) * Euler_2k(k))
         except (OverflowError, RecursionError) as e:
             print("\nThe entered value is too large to handle.\n")
-            overflowed = True
+            terminated = True
             break
 
         approximation = Decimal(pow(approximationExponentiated, 1 / (2*k + 1)))
@@ -72,4 +72,4 @@ if flag:
 else:
     print("\nn must be a whole number.\n")
 
-if not overflowed and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")
+if not terminated and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
