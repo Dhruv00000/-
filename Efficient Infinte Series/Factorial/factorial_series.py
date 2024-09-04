@@ -4,8 +4,6 @@ from time import perf_counter
 def factorial(n: int):
     return factorial(n - 1) * n if n != 0 else 1
 
-pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
-
 k: int = 0
 approximation: Decimal = 0
 previous: Decimal = 0
