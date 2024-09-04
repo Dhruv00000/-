@@ -1,5 +1,6 @@
 from decimal import Decimal
 from time import perf_counter
+from math import atan
 
 def double_factorial(n: int):
     return double_factorial(n - 2) * n if n not in [0, 1] else 1
@@ -15,7 +16,7 @@ totalComputationTime: float = 0
 while True:
 
     iterationStartTime: float = perf_counter()
-    approximation += 2 * Decimal(factorial(k + 1) / double_factorial(2*k + 1))
+    approximation += 4 * Decimal(atan(1 / (pow(k, 2) + k + 1)))
     iterationEndTime: float = perf_counter()
 
     print(f"\nIteration {k}")
