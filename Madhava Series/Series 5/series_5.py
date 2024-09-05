@@ -1,7 +1,7 @@
 from decimal import Decimal
 from time import perf_counter
 
-k: int = 0
+iterationCounter: int = 1
 n: int = 1
 approximation: Decimal = 0
 previous: Decimal = 0
@@ -11,8 +11,6 @@ totalComputationTime: float = 0
 def invertSign(num: int):
     return -1 if num % 6 == 5 else 1
 
-for i in range(1, 11): print(invertSign(i))
-
 while True:
 
     if n % 3 != 0:
@@ -21,7 +19,7 @@ while True:
         approximation += 2 * Decimal(pow(3, 1/2)) * invertSign(n) / n
         iterationEndTime: float = perf_counter()
 
-        print(f"\nIteration {k + 1}")
+        print(f"\nIteration {iterationCounter}")
         print(f"Approximation = {approximation}")
 
         for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
@@ -42,8 +40,8 @@ while True:
         elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
 
         previous = approximation
-        k += 1
+        iterationCounter += 1
     
     n += 2
 
-print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k + 1} iterations.\n")
+print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {iterationCounter} iterations.\n")
