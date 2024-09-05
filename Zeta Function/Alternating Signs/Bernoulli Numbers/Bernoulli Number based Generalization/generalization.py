@@ -12,9 +12,6 @@ totalComputationTime: float = 0
 def factorial(n: int):
     return factorial(n - 1) * n if n != 0 else 1
 
-try: n: int = int(input("Enter a value for 'n': "))
-except ValueError: n = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
-
 def Bernoulli(num: int):
     if num == 0: return 1
 
@@ -25,12 +22,15 @@ def Bernoulli(num: int):
     )
     return 1 - result
 
+try: n: int = int(input("Enter a value for 'n': "))
+except ValueError: n = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
+
 flag: bool = isinstance(n, int) and n != 0 and n > 0
 if flag:
     while True:
         try:
             iterationStartTime: float = perf_counter()
-            approximationExponentiated += pow(-1, n + 1) * (2 * factorial(2*n)) / (pow(k, 2*n) * pow(2, 2*n) * Bernoulli(2*n))
+            approximationExponentiated += (factorial(2*n) * pow(-1, k + 1)) / (pow(k, 2*n) * Bernoulli(2*n) * (pow(2, 2*n - 1) - 1))
         except (OverflowError, RecursionError) as e:
             print("\nThe entered value is too large to handle.\n")
             terminated = True
