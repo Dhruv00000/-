@@ -4,7 +4,6 @@ from time import perf_counter
 def epsilon(n):
     PrimeFactorCount: int = 0
 
-    # if n % 2 == 0: PrimeFactorCount += 1
     while n % 2 == 0: n = n // 2
 
     for i in range(3, n + 1, 2):
