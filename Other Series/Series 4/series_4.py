@@ -6,7 +6,7 @@ from time import sleep
 k: int = 2
 approximationInverted: float = 0
 approximation: Decimal = 0
-previous: Decimal = 3.14159265358979323
+previous: Decimal = 3.14
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 

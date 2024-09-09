@@ -7,27 +7,22 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-alternateTerms: list = [1, 3]
+previousHarmonic: int = 1
 
-def fibonacci_2n(num: int):
+def nth_Harmonic():
+    global previousHarmonic
 
-    if num == 1: return 1
-    if num == 2: return 3
+    if n == 1: return 1
 
-    result: int = 3 * alternateTerms[1] - alternateTerms[0]
-
-    alternateTerms.pop(0)
-    alternateTerms.append(result)
+    result: int = previousHarmonic + 1 / n
+    previousHarmonic = result
 
     return result
-
-def factorial(n: int):
-    return factorial(n - 1) * n if n != 0 else 1
 
 while True:
 
     iterationStartTime: float = perf_counter()
-    approximationSquared += (fibonacci_2n(n) * 25 * pow(5, 1/2) * pow(factorial(n), 2)) / (pow(n, 2) * 4 * factorial(2 * n))
+    approximationSquared += 12 * nth_Harmonic() / (n * pow(2, n))
     approximation = Decimal(pow(approximationSquared, 1/2))
     iterationEndTime: float = perf_counter()
 
