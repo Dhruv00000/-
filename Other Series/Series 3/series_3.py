@@ -9,9 +9,9 @@ totalComputationTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximation += 8 * Decimal(1 / ((4*k + 1) * (4*k + 3)))
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

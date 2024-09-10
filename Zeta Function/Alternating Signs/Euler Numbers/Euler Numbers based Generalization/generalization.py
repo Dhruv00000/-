@@ -8,17 +8,19 @@ previous: Decimal = 0
 finalAccuracy: int = 0
 terminated: bool = False
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
 
 try: k: int = int(input("Enter a value for 'k': "))
 except ValueError: k = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
 
-def Euler_2k(num: int):
+def Euler_2k(num: int) -> float:
 
     if num == 0: return 1
-    result: int = 0
+    result: float = 0
 
     for k in range(1, 2*num + 1):
         innerLoopSum: float = sum(
@@ -34,7 +36,7 @@ flag: bool = isinstance(k, int) and k >= 0
 if flag:
     while True:
         try:
-            iterationStartTime: float = perf_counter()
+            iterationStartTime = perf_counter()
             approximationExponentiated += (pow(-1, n - k) * factorial(2*k) * pow(2, 2*k + 2)) / (pow(2*n + 1, 2*k + 1) * Euler_2k(k))
         except (OverflowError, RecursionError) as e:
             print("\nThe entered value is too large to handle.\n")
@@ -42,7 +44,7 @@ if flag:
             break
 
         approximation = Decimal(pow(approximationExponentiated, 1 / (2*k + 1)))
-        iterationEndTime: float = perf_counter()
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {n + 1}")
         print(f"Approximation = {approximation}")

@@ -8,11 +8,13 @@ previous: Decimal = 0
 finalAccuracy: int = 0
 terminated: bool = False
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
 
-def Bernoulli(num: int):
+def Bernoulli(num: int) -> float:
     if num == 0: return 1
 
     result: float = sum(
@@ -29,7 +31,7 @@ flag: bool = isinstance(n, int) and n != 0 and n > 0
 if flag:
     while True:
         try:
-            iterationStartTime: float = perf_counter()
+            iterationStartTime = perf_counter()
             approximationExponentiated += (2 * factorial(2*n)) / (pow(2*k + 1, 2*n) * (pow(2, 2*n) - 1) * Bernoulli(2*n))
         except (OverflowError, RecursionError) as e:
             print("\nThe entered value is too large to handle.\n")
@@ -37,7 +39,7 @@ if flag:
             break
 
         approximation = Decimal(pow(approximationExponentiated, 1 / (2*n)))
-        iterationEndTime: float = perf_counter()
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {k + 1}")
         print(f"Approximation = {approximation}")

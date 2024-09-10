@@ -2,7 +2,7 @@ from decimal import Decimal
 from time import perf_counter
 from time import sleep
 
-def double_factorial(n: int):
+def double_factorial(n: int) -> int:
     return double_factorial(n - 2) * n if n not in [0, 1] else 1
 
 k: int = 0
@@ -11,13 +11,15 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationInverted += pow((double_factorial(2*k + 1) / ((2*k + 1) * double_factorial(2*k))), 3) * (4*k + 1) * pow(-1, k) / 2
     approximation = 1 / Decimal(approximationInverted)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {2 / approximation}")

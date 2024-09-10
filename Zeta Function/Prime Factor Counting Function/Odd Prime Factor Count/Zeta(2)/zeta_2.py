@@ -4,28 +4,25 @@ from time import sleep
 
 iterationCounter: int = 1
 n: int = 2
-approximationSquaredInverted: float = 0
+approximationSquared: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def epsilonModified(n):
+def epsilonModified(n) -> int:
     PrimeFactorCount: int = 0
 
-    if n % 2 == 0:
+    while n % 2 == 0:
         n = n // 2
         PrimeFactorCount += 1
 
     for i in range(3, n + 1, 2):
-        if n % i== 0:
+        while n % i== 0:
             n = n // i
             PrimeFactorCount += 1
-        if n % i == 0:
-            PrimeFactorCount = 0
-    
-    if n % 2 == 0:
-        PrimeFactorCount = 0
 
     return PrimeFactorCount
 
@@ -33,13 +30,13 @@ while True:
 
     if epsilonModified(n) % 2 != 0:
 
-        iterationStartTime: float = perf_counter()
-        approximationSquaredInverted += 2 / (9 * pow(n, 2))
-        approximation = Decimal(pow(approximationSquaredInverted, -1/2))
-        iterationEndTime: float = perf_counter()
+        iterationStartTime = perf_counter()
+        approximationSquared += 20 / pow(n, 2)
+        approximation = Decimal(pow(approximationSquared, 1/2))
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {iterationCounter}")
-        print(f"Approximation = {approximationSquaredInverted / 20}")
+        print(f"Approximation = {approximationSquared / 20}")
 
         for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
             if char != str(approximation)[i]:

@@ -8,6 +8,8 @@ previous: Decimal = 3.14
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 flag: bool = False
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 try: x: float = float(input("Enter a value for 'x': "))
 except ValueError: x = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
@@ -20,12 +22,12 @@ except TypeError:
 if flag:
     while True:
 
-        iterationStartTime: float = perf_counter()
+        iterationStartTime = perf_counter()
 
         approximation += Decimal(sin(float(previous) * x) / (n + x)) * Decimal(pow(-1, n))
         if n != 0: approximation += Decimal(sin(float(previous) * x) / (x - n)) * Decimal(pow(-1, n))
 
-        iterationEndTime: float = perf_counter()
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {n + 1}")
         print(f"Approximation = {approximation}")

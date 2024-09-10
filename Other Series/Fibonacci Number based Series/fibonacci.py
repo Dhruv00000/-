@@ -8,8 +8,10 @@ previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 alternateTerms: list = [1, 3]
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def fibonacci_2n(num: int):
+def fibonacci_2n(num: int) -> int:
 
     if num == 1: return 1
     if num == 2: return 3
@@ -21,15 +23,15 @@ def fibonacci_2n(num: int):
 
     return result
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationSquared += (fibonacci_2n(n) * 25 * pow(5, 1/2) * pow(factorial(n), 2)) / (pow(n, 2) * 4 * factorial(2 * n))
     approximation = Decimal(pow(approximationSquared, 1/2))
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {n}")
     print(f"Approximation = {approximation}")

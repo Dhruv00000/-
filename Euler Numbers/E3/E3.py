@@ -7,13 +7,15 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationExponentiated += 96 / pow((2*k + 1), 4)
     approximation = Decimal(pow(approximationExponentiated, 1/4))
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

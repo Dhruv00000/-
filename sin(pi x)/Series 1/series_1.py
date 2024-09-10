@@ -6,16 +6,18 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def approximationFunction(num: int):
+def approximationFunction(num: int) -> Decimal:
     return Decimal(pow(-1, num) / (num + 1/2))
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximation += approximationFunction(k)
     if k != 0: approximation += approximationFunction(-k)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

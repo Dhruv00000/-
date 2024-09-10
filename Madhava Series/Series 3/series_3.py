@@ -1,40 +1,28 @@
 from decimal import Decimal
 from time import perf_counter
-from time import sleep
 
 iterationCounter: int = 1
-n: int = 2
-approximationSquared: float = 0
+n: int = 1
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def epsilonModified(n):
-    PrimeFactorCount: int = 0
-
-    while n % 2 == 0:
-        n = n // 2
-        PrimeFactorCount += 1
-
-    for i in range(3, n + 1, 2):
-        while n % i== 0:
-            n = n // i
-            PrimeFactorCount += 1
-
-    return PrimeFactorCount
+def invertSign(num: int) -> int:
+    return -1 if num % 6 == 5 else 1
 
 while True:
 
-    if epsilonModified(n) % 2 != 0:
+    if n % 3 != 0:
 
-        iterationStartTime: float = perf_counter()
-        approximationSquared += 20 / pow(n, 2)
-        approximation = Decimal(pow(approximationSquared, 1/2))
-        iterationEndTime: float = perf_counter()
+        iterationStartTime = perf_counter()
+        approximation += 2 * Decimal(pow(3, 1/2)) * invertSign(n) / n
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {iterationCounter}")
-        print(f"Approximation = {approximationSquared / 20}")
+        print(f"Approximation = {approximation}")
 
         for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
             if char != str(approximation)[i]:
@@ -56,6 +44,6 @@ while True:
         previous = approximation
         iterationCounter += 1
     
-    n += 1
+    n += 2
 
 print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {iterationCounter} iterations.\n")

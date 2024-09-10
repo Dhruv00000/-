@@ -1,27 +1,27 @@
 from decimal import Decimal
 from time import perf_counter
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
-
-pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
 
 k: int = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
 
     binomialCoeffecient = 1 / factorial(k)
     for i in range(k):
         binomialCoeffecient *= (1/2 - i)
     approximation += 4 * Decimal((pow(-1, k) * binomialCoeffecient) / (2*k + 1))
 
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

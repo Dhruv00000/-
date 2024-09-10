@@ -7,11 +7,13 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
 
-def risingFactorial(x: int, n: int):
+def risingFactorial(x: int, n: int) -> float:
     result: int = 1
 
     if n == 0: return 1
@@ -22,10 +24,10 @@ def risingFactorial(x: int, n: int):
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationInverted += Decimal(pow(2 / 27, k) * (15*k + 2) * risingFactorial(1/2, k) * risingFactorial(1/3, k) * risingFactorial(2/3, k) / pow(factorial(k), 3))
     approximation = 27 / (4 * approximationInverted)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

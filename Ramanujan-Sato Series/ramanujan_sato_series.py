@@ -1,7 +1,7 @@
 from decimal import Decimal
 from time import perf_counter
 
-def factorial(n: int):
+def factorial(n: int) -> int:
     return factorial(n - 1) * n if n != 0 else 1
 
 k: int = 0
@@ -9,13 +9,15 @@ approximationInverted: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationInverted += Decimal((factorial(4*k) * (26390*k + 1103)) / (pow(factorial(k), 4) * pow(396, 4*k)))
     approximation: Decimal = Decimal(9801 / (2 * Decimal(pow(2, 1/2)) * (approximationInverted)))
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

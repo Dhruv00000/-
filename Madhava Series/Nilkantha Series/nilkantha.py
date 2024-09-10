@@ -1,21 +1,21 @@
 from decimal import Decimal
 from time import perf_counter
 
-pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
-
 k: int = 1
 approximationIntermediate: Decimal = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationIntermediate += Decimal(pow(-1, k + 1) / (k * (k + 1) * (2*k + 1)))
     approximation = approximationIntermediate + 3
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k}")
     print(f"Approximation = {approximation}")

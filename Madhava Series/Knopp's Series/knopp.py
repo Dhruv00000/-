@@ -7,17 +7,19 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def innerSummationLoop(num: int):
-    result: int = sum(1 / (2*i + 1) for i in range(num + 1))
+def innerSummationLoop(num: int) -> float:
+    result: float = sum(1 / (2*i + 1) for i in range(num + 1))
     return result
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationSquared += pow(-1, k) / (k + 1) * innerSummationLoop(k)
     approximation = Decimal(pow(approximationSquared, 1/2)) * 4
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
     print(f"Approximation = {approximation}")

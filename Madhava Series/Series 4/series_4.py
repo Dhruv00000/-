@@ -7,17 +7,19 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def invertSign(num: int):
-    return -1 if num % 6 == 5 else 1
+def invertSign(num: int) -> int:
+    return -1 if num % 3 == 2 else 1
 
 while True:
 
     if n % 3 != 0:
 
-        iterationStartTime: float = perf_counter()
-        approximation += 2 * Decimal(pow(3, 1/2)) * invertSign(n) / n
-        iterationEndTime: float = perf_counter()
+        iterationStartTime = perf_counter()
+        approximation += 3 * Decimal(pow(3, 1/2)) * invertSign(n) / n
+        iterationEndTime = perf_counter()
 
         print(f"\nIteration {iterationCounter}")
         print(f"Approximation = {approximation}")
@@ -42,6 +44,6 @@ while True:
         previous = approximation
         iterationCounter += 1
     
-    n += 2
+    n += 1
 
 print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {iterationCounter} iterations.\n")

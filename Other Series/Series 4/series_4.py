@@ -1,7 +1,6 @@
 from decimal import Decimal
 from time import perf_counter
 from math import tan
-from time import sleep
 
 k: int = 2
 approximationInverted: float = 0
@@ -9,13 +8,15 @@ approximation: Decimal = 0
 previous: Decimal = 3.14
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationInverted += tan(previous / pow(2, k)) / pow(2, k)
     approximation = 1 / Decimal(approximationInverted)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k - 1}")
     print(f"Approximation = {approximation}")

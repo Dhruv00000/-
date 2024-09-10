@@ -1,17 +1,16 @@
 from decimal import Decimal
 from time import perf_counter
 
-pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
-
 n: int = 0
 approximationIntermediate: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-# coefficients: list = [1/2]
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def GregoryCoeffecient(num: int):
+def GregoryCoeffecient(num: int) -> float:
     if num == 1 : return 1/2
 
     result: float = 0 - sum(GregoryCoeffecient(k) / (num - k + 1) for k in range(1, num))
@@ -19,10 +18,10 @@ def GregoryCoeffecient(num: int):
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     (approximationIntermediate) += pow(-1, n) * (GregoryCoeffecient(3*n + 1) + GregoryCoeffecient(3*n + 2))
     approximation = Decimal(pow(3, 1/2) / approximationIntermediate)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {n + 1}")
     print(f"Approximation = {approximation}")

@@ -8,8 +8,10 @@ previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 previousHarmonic: int = 1
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def nth_Harmonic():
+def nth_Harmonic() -> float:
     global previousHarmonic
 
     if n == 1: return 1
@@ -21,10 +23,10 @@ def nth_Harmonic():
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationSquared += 12 * nth_Harmonic() / (n * pow(2, n))
     approximation = Decimal(pow(approximationSquared, 1/2))
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {n}")
     print(f"Approximation = {approximation}")

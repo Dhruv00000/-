@@ -1,7 +1,7 @@
 from decimal import Decimal
 from time import perf_counter
 
-def sum_of_divisors(num: int):
+def sum_of_divisors(num: int) -> int:
     divisorSum: int = sum(
         divisorCandidate
         for divisorCandidate in range(1, num)
@@ -10,20 +10,21 @@ def sum_of_divisors(num: int):
     return divisorSum + num
 
 e: float = 2.7182818284590452
-
 k: int = 1
 approximationIntermediate: float = 0
 approximation: Decimal = 0
 previous: Decimal = 3.14
 finalAccuracy: int = 0
 totalComputationTime: float = 0
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationIntermediate += sum_of_divisors(k) * pow(e, (-2 * float(previous) * k))
     approximation = 1 / Decimal(1/3 - 8 * approximationIntermediate)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {k}")
     print(f"Approximation = {approximation}")

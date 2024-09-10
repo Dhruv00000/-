@@ -1,8 +1,6 @@
 from decimal import Decimal
 from time import perf_counter
 
-pi: Decimal = Decimal(3.141592653589793238462643383279502884197169399375) # math.pi has less decimal places, and this is the highest number of decimal places I could get python to print.
-
 n: int = 0
 approximationIntermediate: float = 0
 approximation: Decimal = 0
@@ -10,8 +8,10 @@ previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 Coeffecients: list = []
+iterationStartTime: float = 0
+iterationEndTime: float = 0
 
-def GregoryCoeffecient(num: int):
+def GregoryCoeffecient(num: int) -> float:
     if num == 1 : return 1/2
 
     result: float = 0 - sum(Coeffecients[k + 1] / (num - k + 1) for k in range(1, num))
@@ -20,10 +20,10 @@ def GregoryCoeffecient(num: int):
 
 while True:
 
-    iterationStartTime: float = perf_counter()
+    iterationStartTime = perf_counter()
     approximationIntermediate += pow(-1, n) * (GregoryCoeffecient(3*n + 3) + GregoryCoeffecient(3*n + 4))
     approximation = pow(3, 1/2) / (1/2 - approximationIntermediate)
-    iterationEndTime: float = perf_counter()
+    iterationEndTime = perf_counter()
 
     print(f"\nIteration {n + 1}")
     print(f"Approximation = {approximation}")
@@ -43,7 +43,7 @@ while True:
     if deviation == 0:
         print("Negligible deviation (terminating the program)\n")
         break
-    elif deviation != approximation: print(f"Deviation from previous iteration: {deviationq}") # this if-statement prevents a deviation from being shown during the first iteration.
+    elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
 
     previous = approximation
     n += 1
