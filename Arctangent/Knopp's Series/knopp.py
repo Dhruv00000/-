@@ -2,11 +2,6 @@ from decimal import Decimal
 from time import perf_counter
 from math import atan
 
-def double_factorial(n: int) -> int:
-    return double_factorial(n - 2) * n if n not in [0, 1] else 1
-def factorial(n: int) -> int:
-    return factorial(n - 1) * n if n != 0 else 1
-
 k: int = 1
 approximation: Decimal = 0
 previous: Decimal = 0
