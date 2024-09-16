@@ -56,6 +56,9 @@ if flag:
         totalComputationTime += iterationEndTime - iterationStartTime
 
         deviation: Decimal = approximation - previous
+        if deviation == 0 and iterationCounter == 1:
+            print("\nThe entered value is too large.\n")
+            break
         if deviation == 0: 
             print("Negligible deviation (terminating the program)\n")
             break
@@ -68,4 +71,4 @@ if flag:
 else:
     print("\nx must be a natural number >= 2.\n")
 
-if flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {iterationCounter} iterations.\n")
+if flag and iterationCounter != 1: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {iterationCounter} iterations.\n")
