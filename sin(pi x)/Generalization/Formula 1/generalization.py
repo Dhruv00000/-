@@ -4,22 +4,32 @@ from math import sin
 
 n: int = 0
 approximation: Decimal = 0
-previous: Decimal = 3.14
+piString: str = "3.1415926535897932384626433832795028841971693993751"
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-flag: bool = False
+flag1: bool = False
 iterationStartTime: float = 0
 iterationEndTime: float = 0
 
 try: x: float = float(input("Enter a value for 'x': "))
 except ValueError: x = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
 
-try:
-    flag = x % 1 != 0 and isinstance(x, float)
-except TypeError:
-    flag = False
+try: precision: int = int(input("Enter the number of correct decimal places to use in the initial value of pi (defaults to 49 if a large value is entered.): "))
+except ValueError: precision = ""
 
-if flag:
+print() # Prints an empty line before errors are displayed (to make the output look cleaner).
+
+try:
+    flag1 = x % 1 != 0 and isinstance(x, float)
+except TypeError:
+    flag1 = False
+
+flag2: bool = isinstance(precision, int) and precision > 0
+
+if flag1 and flag2:
+
+    previous: Decimal = Decimal(piString[: precision + 2])
+
     while True:
 
         iterationStartTime = perf_counter()
@@ -32,12 +42,14 @@ if flag:
         print(f"\nIteration {n + 1}")
         print(f"Approximation = {approximation}")
 
-        for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
+        for i, char in enumerate(piString):
             if char != str(approximation)[i]:
+
                 if i < 2: print("No accurate decimal places")
                 else:
                     print(f"{i - 2} correct decimal place(s)")
                     finalAccuracy = i - 2
+
                 break
 
         print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
@@ -52,7 +64,7 @@ if flag:
         if finalAccuracy >= 2: previous = approximation # this stops the extremely incorrect approximations from the first few steps from ruining all succeeding steps.
         n += 1
 
-else:
-    print("\nx must be a non-integral rational number less than 2^52 - 1.\n")
+if not flag1: print("x must be a non-integral rational number less than 2^52 - 1.\n")
+if not flag2: print("Precision must be a natural number.\n")
 
-if flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
+if flag1 and flag2: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {n + 1} iterations.\n")
