@@ -9,7 +9,7 @@ finalAccuracy: int = 0
 totalComputationTime: float = 0
 iterationStartTime: float = 0
 iterationEndTime: float = 0
-a_values: list = [pow(2, 1/2)]
+a_values: list[float] = [pow(2, 1/2)]
 x_copy: int = 0
 
 def a_k(num: int) -> float:

@@ -7,7 +7,7 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-alternateTerms: list = [1, 3]
+alternateTerms: list[int] = [1, 3]
 iterationStartTime: float = 0
 iterationEndTime: float = 0
 

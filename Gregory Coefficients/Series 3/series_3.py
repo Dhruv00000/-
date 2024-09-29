@@ -7,7 +7,7 @@ approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
 totalComputationTime: float = 0
-Coeffecients: list = []
+Coeffecients: list[float] = []
 iterationStartTime: float = 0
 iterationEndTime: float = 0
 
