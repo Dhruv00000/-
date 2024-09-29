@@ -37,7 +37,7 @@ while True:
     print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
     totalComputationTime += iterationEndTime - iterationStartTime
 
-    deviation: Decimal = approximation - previous
+    deviation: Decimal = Decimal(approximation - previous)
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
         break

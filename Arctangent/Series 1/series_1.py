@@ -55,7 +55,7 @@ if flag:
         print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
         totalComputationTime += iterationEndTime - iterationStartTime
 
-        deviation: Decimal = approximation - previous
+        deviation: Decimal = Decimal(approximation - previous)
         if deviation == 0 and iterationCounter == 1:
             print("\nThe entered value is too large.\n")
             break

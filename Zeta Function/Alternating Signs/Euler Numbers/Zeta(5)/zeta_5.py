@@ -13,7 +13,7 @@ iterationEndTime: float = 0
 while True:
 
     iterationStartTime = perf_counter()
-    approximationExponentiated += (1536/5) * pow(pow(-1, k) / (2*k + 1), 5)
+    approximationExponentiated += (1536 / 5) * pow(pow(-1, k) / (2*k + 1), 5)
     approximation = Decimal(pow(approximationExponentiated, 1/5))
     iterationEndTime = perf_counter()
 
@@ -33,7 +33,7 @@ while True:
     print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
     totalComputationTime += iterationEndTime - iterationStartTime
 
-    deviation: Decimal = approximation - previous
+    deviation: Decimal = Decimal(approximation - previous)
     if deviation == 0: 
         print("Negligible deviation (terminating the program)\n")
         break

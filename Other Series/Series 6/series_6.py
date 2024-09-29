@@ -1,6 +1,5 @@
 from decimal import Decimal
 from time import perf_counter
-from time import sleep
 
 k: int = 0
 approximation: Decimal = 0
@@ -38,7 +37,5 @@ while True:
 
     previous = approximation
     k += 1
-
-    # sleep(5)
 
 print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k + 1} iterations.\n")
