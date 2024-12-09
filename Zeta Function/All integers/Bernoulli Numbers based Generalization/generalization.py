@@ -1,10 +1,8 @@
-from decimal import Decimal
 from time import perf_counter
 
 k: int = 1
 approximationExponentiated: float = 0
-approximation: Decimal = 0
-previous: Decimal = 0
+approximation: str = ""
 finalAccuracy: int = 0
 terminated: bool = False
 totalComputationTime: float = 0
@@ -24,47 +22,39 @@ def Bernoulli(num: int) -> float:
     )
     return 1 - result
 
-try: n: int = int(input("Enter a value for 'n': "))
-except ValueError: n = "" # Setting 'n' to a non-integer ensures that the below check fails and the execution flow is transferred to the else statement at the bottom.
+while True:
+    try:
+        iterationStartTime = perf_counter()
+        approximation += str(int(10 * ((pow(10, k - 1)(((2 * pow(-1, k) * factorial(2*k - 2)) / (pow(2, 2*k - 2) * Bernoulli(2*k - 2) * (1 - pow(2, 1 - k)) * (1 - pow(3, 1 - k)) * (1 - pow(5, 1 - k)) * (1 - pow(7, 1 - k)))) ** (2*k - 2))) % 1)))
+    except (OverflowError, RecursionError) as e:
+        print("\nThe entered value is too large to handle.\n")
+        terminated = True
+        break
 
-flag: bool = isinstance(n, int) and n != 0 and n > 0
-if flag:
-    while True:
-        try:
-            iterationStartTime = perf_counter()
-            approximationExponentiated += pow(-1, n + 1) * (2 * factorial(2*n)) / (pow(k, 2*n) * pow(2, 2*n) * Bernoulli(2*n))
-        except (OverflowError, RecursionError) as e:
-            print("\nThe entered value is too large to handle.\n")
-            terminated = True
+    approximation = Decimal(pow(approximationExponentiated, 1 / (2*n)))
+    iterationEndTime = perf_counter()
+
+    print(f"\nIteration {k}")
+    print(f"Approximation = {approximation}")
+
+    for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
+        if char != str(approximation)[i]:
+            if i < 2: print("No accurate decimal places")
+            else:
+                print(f"{i - 2} correct decimal place(s)")
+                finalAccuracy = i - 2
             break
 
-        approximation = Decimal(pow(approximationExponentiated, 1 / (2*n)))
-        iterationEndTime = perf_counter()
+    print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
+    totalComputationTime += iterationEndTime - iterationStartTime
 
-        print(f"\nIteration {k}")
-        print(f"Approximation = {approximation}")
+    deviation: Decimal = approximation - previous
+    if deviation == 0: 
+        print("Negligible deviation (terminating the program)\n")
+        break
+    elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
 
-        for i, char in enumerate("3.141592653589793238462643383279502884197169399375"): # using str(pi) instead of writing the whole string like I have done here somehow displays a different number??? idk
-            if char != str(approximation)[i]:
-                if i < 2: print("No accurate decimal places")
-                else:
-                    print(f"{i - 2} correct decimal place(s)")
-                    finalAccuracy = i - 2
-                break
+    previous = approximation
+    k += 1
 
-        print(f"Iteration duration: {iterationEndTime - iterationStartTime}  seconds")
-        totalComputationTime += iterationEndTime - iterationStartTime
-
-        deviation: Decimal = Decimal(approximation - previous)
-        if deviation == 0: 
-            print("Negligible deviation (terminating the program)\n")
-            break
-        elif deviation != approximation: print(f"Deviation from previous iteration: {deviation}") # this if-statement prevents a deviation from being shown during the first iteration.
-
-        previous = approximation
-        k += 1
-
-else:
-    print("\nn must be a positive integer.\n")
-
-if not terminated and flag: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")
+if not terminated: print(f"\n\nComputed {finalAccuracy} correct decimal places in {totalComputationTime} seconds and {k} iterations.\n")

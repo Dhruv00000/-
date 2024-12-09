@@ -3,8 +3,8 @@ from time import perf_counter
 
 k: int = 0
 approximationSquared: float = 0
-approximation: Decimal = 0
-previous: Decimal = 0
+approximation: Decimal = Decimal(0)
+previous: Decimal = Decimal(0)
 finalAccuracy: int = 0
 totalComputationTime: float = 0
 iterationStartTime: float = 0
@@ -17,7 +17,7 @@ def innerSummationLoop(num: int) -> float:
 while True:
 
     iterationStartTime = perf_counter()
-    approximationSquared += pow(-1, k) / (k + 1) * innerSummationLoop(k)
+    approximationSquared += (pow(-1, k) / (k + 1)) * innerSummationLoop(k)
     approximation = Decimal(pow(approximationSquared, 1/2)) * 4
     iterationEndTime = perf_counter()
 
