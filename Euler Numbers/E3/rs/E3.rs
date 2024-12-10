@@ -19,7 +19,7 @@ fn main() {
         approximation = f64::powf(approximation_exponentiated, 1.0 / 4.0);
         iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
-        println!("Iteration {}", iterator as u16 + 1);
+        println!("\nIteration {}", iterator as u16 + 1);
         println!("Approximation = {:.51}", approximation);
 
         let mut i: u8 = 0;
@@ -54,5 +54,5 @@ fn main() {
 
     }
 
-    println!("Computed {} correct decimal places in {:?} and {} iterations.", final_accuracy, total_computation_time, iterator as u16 + 1);
+    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator as u16 + 1);
 }

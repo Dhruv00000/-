@@ -2,11 +2,8 @@ use std::time::{Duration, Instant};
 
 fn main() {
 
-    let mut iterator: f64 = 0.0;
-    let mut approximation_squared: f64 = 0.0;
-    let mut approximation: f64;
-    let mut previous_approximation: f64 = 0.0;
-    let mut deviation: f64;
+    let mut iterator: u16 = 1;
+    let mut approximation: f64 = 0.0;
     let mut final_accuracy: u8 = 0;
     let mut start_time: Instant;
     let mut iteration_time: Duration;
@@ -15,11 +12,10 @@ fn main() {
     loop {
 
         start_time = Instant::now();
-        approximation_squared += (f64::powf(-1.0, iterator) / (iterator + 1.0)) * inner_summation_loop(iterator as u16);
-        approximation = f64::powf(approximation_squared, 0.5) * 4.0;
+        approximation += 2.0 * (factorial(iterator + 1) as f64 / double_factorial(2 * iterator + 1) as f64);
         iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
-        println!("\nIteration {}", iterator as u16 + 1);
+        println!("Iteration {}", iterator);
         println!("Approximation = {:.51}", approximation);
 
         let mut i: u8 = 0;
@@ -39,30 +35,26 @@ fn main() {
             i += 1;
         }
 
-        println!("Iteration duration: {:?}", iteration_time);
+        println!("Iteration duration: {:?}\n", iteration_time);
         total_computation_time += iteration_time;
-    
-        deviation = approximation - previous_approximation;
-        if deviation.abs() < 1e-50 {
-            println!("\nSummation converged. Terminating program...");
+
+        if iterator == 27 {
+            println!("\nFactorials from this iteration onwards will become too big to store. Terminating the program...");
             break;
         }
-        else { println!("Deviation from previous iteration: {:.51}\n", deviation) }
-
-        previous_approximation = approximation;
-        iterator += 1.0;
+        iterator += 1;
 
     }
 
-    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator as u16 + 1);
+    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator);
 }
 
-fn inner_summation_loop (num: u16) -> f64 {
-    let mut result: f64 = 0.0;
+fn factorial(num: u16) -> u128 {
+    if num == 0 { return 1; }
+    return num as u128 * factorial(num - 1);
+}
 
-    for i in 0 .. num + 1 {
-        result += 1.0 / (2.0 * (i as f64) + 1.0)
-    }
-
-    return result
+fn double_factorial(num: u16) -> u128 {
+    if (num == 0) || (num == 1) { return 1; }
+    return num as u128 * double_factorial(num - 2);
 }
