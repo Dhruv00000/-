@@ -2,9 +2,8 @@ use std::time::{Duration, Instant};
 
 fn main() {
 
-    let mut iterator: f64 = 0.0;
-    let mut approximation_squared: f64 = 0.0;
-    let mut approximation: f64;
+    let mut iterator: f64 = 1.0;
+    let mut approximation: f64 = 0.0;
     let mut previous_approximation: f64 = 0.0;
     let mut deviation: f64;
     let mut final_accuracy: u8 = 0;
@@ -15,11 +14,10 @@ fn main() {
     loop {
 
         start_time = Instant::now();
-        approximation_squared += (f64::powf(-1.0, iterator) / (iterator + 1.0)) * inner_summation_loop(iterator as u16);
-        approximation = f64::powf(approximation_squared, 0.5) * 4.0;
-        iteration_time = start_time.elapsed();
+        approximation += 4.0 * (1.0 / (f64::powf(iterator, 2.0) + iterator + 1.0)).atan();
+        iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
-        println!("Iteration {}", iterator as u16 + 1);
+        println!("Iteration {}", iterator as u16);
         println!("Approximation = {:.51}", approximation);
 
         let mut i: u8 = 0;
@@ -39,8 +37,8 @@ fn main() {
             i += 1;
         }
 
-        println!("Iteration duration: {:?}", end_time - start_time);
-        total_computation_time += end_time - start_time;
+        println!("Iteration duration: {:?}", iteration_time);
+        total_computation_time += iteration_time;
     
         deviation = approximation - previous_approximation;
         if deviation.abs() < 1e-50 {
@@ -54,15 +52,5 @@ fn main() {
 
     }
 
-    println!("Computed {} correct decimal places in {:?} and {} iterations.", final_accuracy, total_computation_time, iterator as u16 + 1);
-}
-
-fn inner_summation_loop (num: u16) -> f64 {
-    let mut result: f64 = 0.0;
-
-    for i in 0 .. num + 1 {
-        result += 1.0 / (2.0 * (i as f64) + 1.0)
-    }
-
-    return result
+    println!("Computed {} correct decimal places in {:?} and {} iterations.", final_accuracy, total_computation_time, iterator as u16);
 }
