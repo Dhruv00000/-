@@ -4,6 +4,8 @@ fn main() {
 
     let mut iterator: u16 = 0;
     let mut approximation: f64 = 0.0;
+    let mut previous_approximation: f64 = 0.0;
+    let mut deviation: f64;
     let mut final_accuracy: u8 = 0;
     let mut start_time: Instant;
     let mut iteration_time: Duration;
@@ -35,6 +37,13 @@ fn main() {
             i += 1;
         }
 
+        deviation = approximation - previous_approximation;
+        if deviation.abs() < 1e-50 {
+            println!("\nSummation converged. Terminating program...");
+            break;
+        }
+        else { println!("Deviation from previous iteration: {:.51}\n", deviation) }
+
         println!("Iteration duration: {:?}\n", iteration_time);
         total_computation_time += iteration_time;
 
@@ -42,6 +51,8 @@ fn main() {
             println!("\nFactorials after this iteration will become too big to store. Terminating the program...");
             break;
         }
+
+        previous_approximation = approximation;
         iterator += 1;
 
     }

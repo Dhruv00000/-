@@ -1,9 +1,14 @@
 todo.txt
 __pycache__
+
+# Remove these once theyre implemented
 Other Series/Hypergeometric Inversions/Series 1
 Other Series/Hypergeometric Inversions/Series 1/series_1.py
 
+# Remove these once theyre fixed
 Factorials/Double factorial/Series 4/
+
+
 # Added by cargo
 
 /target

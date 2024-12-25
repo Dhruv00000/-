@@ -2,7 +2,7 @@ use std::time::{Duration, Instant};
 
 fn main() {
 
-    let mut iterator: u16 = 1;
+    let mut iterator: u16 = 0;
     let mut approximation: f64 = 0.0;
     let mut previous_approximation: f64 = 0.0;
     let mut deviation: f64;
@@ -14,10 +14,10 @@ fn main() {
     loop {
 
         start_time = Instant::now();
-        approximation += 2.0 * (factorial(iterator + 1) as f64 / double_factorial(2 * iterator + 1) as f64);
+        approximation += 2.0 * ((factorial(iterator) as i128 * factorial(2*iterator) as i128 * (25 * (iterator as i128) - 3)) as f64 / ((factorial(3*iterator) * u8::pow(2, iterator as u32) as u128)) as f64);
         iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
-        println!("Iteration {}", iterator);
+        println!("Iteration {}", iterator + 1);
         println!("Approximation = {:.51}", approximation);
 
         let mut i: u8 = 0;
@@ -42,13 +42,13 @@ fn main() {
             println!("\nSummation converged. Terminating program...");
             break;
         }
-        else { println!("Deviation from previous iteration: {:.51}\n", deviation); }
+        else { println!("Deviation from previous iteration: {:.51}\n", deviation) }
 
         println!("Iteration duration: {:?}\n", iteration_time);
         total_computation_time += iteration_time;
 
-        if iterator == 27 {
-            println!("\nFactorials from this iteration onwards will become too big to store. Terminating the program...");
+        if iterator == 5 {
+            println!("\nFactorials after this iteration will become too big to store. Terminating the program...");
             break;
         }
 
@@ -57,15 +57,10 @@ fn main() {
 
     }
 
-    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator);
+    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator + 1);
 }
 
 fn factorial(num: u16) -> u128 {
     if num == 0 { return 1; }
     return num as u128 * factorial(num - 1);
-}
-
-fn double_factorial(num: u16) -> u128 {
-    if (num == 0) || (num == 1) { return 1; }
-    return num as u128 * double_factorial(num - 2);
 }
