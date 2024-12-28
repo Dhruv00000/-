@@ -16,7 +16,7 @@ iterationEndTime: float = 0
 while True:
 
     iterationStartTime = perf_counter()
-    approximationInverted += 12 * (pow(-1, k) * factorial(6*k) * (545140134*k + 13591409)) / (factorial(3*k) * pow(factorial(k), 3) * pow(640320, (3*k + 3/2)))
+    approximationInverted += 12 * (pow(-1, k) * factorial(6*k) * (545140134 * k + 13591409)) / (factorial(3*k) * pow(factorial(k), 3) * pow(640320, (3*k + 3/2)))
     approximation = Decimal(1 / approximationInverted)
     iterationEndTime = perf_counter()
 
