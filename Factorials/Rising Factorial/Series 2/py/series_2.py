@@ -25,7 +25,7 @@ def risingFactorial(x: int, n: int) -> float:
 while True:
 
     iterationStartTime = perf_counter()
-    approximationInverted += Decimal(pow((pow(5, 1/2) - 1) / 2, 8*k) * (42*k *pow(5, 1/2) + 30*k + 5 * pow(5, 1/2) - 1) * pow(risingFactorial(1/2, k), 3) / (pow(64, k) * pow(factorial(k), 3)))
+    approximationInverted += Decimal(pow((pow(5, 1/2) - 1) / 2, 8*k) * (42*k * pow(5, 1/2) + 30*k + 5 * pow(5, 1/2) - 1) * pow(risingFactorial(1/2, k), 3) / (pow(64, k) * pow(factorial(k), 3)))
     approximation = 32 / approximationInverted
     iterationEndTime = perf_counter()
 
