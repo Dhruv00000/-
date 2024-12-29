@@ -38,11 +38,7 @@ fn main() {
         }
 
         deviation = approximation - previous_approximation;
-        if deviation.abs() < 1e-50 {
-            println!("\nSummation converged. Terminating program...");
-            break;
-        }
-        else { println!("Deviation from previous iteration: {:.51}\n", deviation); }
+        println!("Deviation from previous iteration: {:.51}\n", deviation);
 
         println!("Iteration duration: {:?}\n", iteration_time);
         total_computation_time += iteration_time;
