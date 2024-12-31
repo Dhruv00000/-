@@ -1,9 +1,9 @@
-use std::{result, time::{Duration, Instant}};
+use std::time::{Duration, Instant};
 
 fn main() {
 
-    let mut iterator: u16 = 1;
-    let mut approximation_squared: f64 = 0.0;
+    let mut iterator: u16 = 0;
+    let mut approximation_intermediate: f64 = 0.0;
     let mut approximation: f64;
     let mut previous_approximation: f64 = 0.0;
     let mut deviation: f64;
@@ -12,27 +12,16 @@ fn main() {
     let mut iteration_time: Duration;
     let mut total_computation_time: Duration = Duration::from_secs(0); // Duration::from_secs(0) is just a temporary value in order to initialize the total_computation_time variable.
 
-    let mut f1: u64 = 1;
-    let mut f2: u64 = 3;
-    let mut result: u64 = 1;
-
     loop {
 
         start_time = Instant::now();
 
-        if iterator > 2 {
-            result = 3 * f2 - f1;
-            f1 = f2;
-            f2 = result;
-        }
-        else if iterator == 2 { result = 3; }
-
-        approximation_squared += (25.0 * f64::powf(5.0, 1.0/2.0) * result as f64 * u128::pow(factorial(iterator), 2) as f64) / (4 * u128::pow(iterator as u128, 2) * factorial(2*iterator)) as f64;
-        approximation = f64::powf(approximation_squared, 1.0/2.0);
+        approximation_intermediate += i8::pow(-1, iterator as u32) as f64 * (gregory_coefficient(3*iterator + 3) + gregory_coefficient(3*iterator + 4));
+        approximation = - f64::powf(3.0, 1.0/2.0) / (approximation_intermediate - 1.0/2.0);
 
         iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
-        println!("Iteration {}", iterator);
+        println!("Iteration {}", iterator + 1);
         println!("Approximation = {:.51}", approximation);
 
         let mut i: u8 = 0;
@@ -53,25 +42,34 @@ fn main() {
         }
 
         deviation = approximation - previous_approximation;
-        println!("Deviation from previous iteration: {:.51}\n", deviation);
+        if deviation.abs() < 1e-50 {
+            println!("\nSummation converged. Terminating program...");
+            break;
+        }
+        else { println!("Deviation from previous iteration: {:.51}\n", deviation) }
 
         println!("Iteration duration: {:?}\n", iteration_time);
         total_computation_time += iteration_time;
-
-        if iterator == 16 {
-            println!("\nFactorials after this iteration will become too big to store. Terminating the program...");
-            break;
-        }
 
         previous_approximation = approximation;
         iterator += 1;
 
     }
 
-    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator);
+    println!("Computed {} correct decimal places in {:?} and {} iterations.\n", final_accuracy, total_computation_time, iterator + 1);
 }
 
-fn factorial(num: u16) -> u128 {
-    if num == 0 { return 1; }
-    return num as u128 * factorial(num - 1);
+fn gregory_coefficient(num: u16) -> f64 {
+
+    if num == 1 { return 1.0/2.0; }
+
+    let mut result: f64 = 0.0;
+
+    let mut k: u16 = 0;
+    while k < num {
+        result -= gregory_coefficient(k) / (num - k + 1) as f64;
+        k += 1;
+    }
+    return result + (1.0 / (num + 1) as f64);
+
 }

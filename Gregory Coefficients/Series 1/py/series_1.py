@@ -19,7 +19,7 @@ def GregoryCoeffecient(num: int) -> float:
 while True:
 
     iterationStartTime = perf_counter()
-    (approximationIntermediate) += pow(-1, n) * (GregoryCoeffecient(3*n + 1) + GregoryCoeffecient(3*n + 2))
+    approximationIntermediate += pow(-1, n) * (GregoryCoeffecient(3*n + 1) + GregoryCoeffecient(3*n + 2))
     approximation = Decimal(pow(3, 1/2) / approximationIntermediate)
     iterationEndTime = perf_counter()
 
