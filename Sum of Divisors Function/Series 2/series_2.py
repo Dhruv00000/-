@@ -1,6 +1,5 @@
 from decimal import Decimal
 from time import perf_counter
-from math import log
 
 def sum_of_divisors(num: int) -> int:
     divisorSum: int = sum(

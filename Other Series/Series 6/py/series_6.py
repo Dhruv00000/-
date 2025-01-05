@@ -12,7 +12,7 @@ iterationEndTime: float = 0
 while True:
 
     iterationStartTime = perf_counter()
-    approximation += Decimal(pow(-1/4, k)) * (Decimal(2 / (4*k + 1)) + Decimal(2 / (4*k + 2)) + Decimal(1 / (4*k + 3)))
+    approximation += (Decimal(4 / (4*k + 1)) + Decimal(4 / (8*k + 3)) + Decimal(1 / (2*k + 1)) - Decimal(1 / (8*k + 7))) / (pow(16, k) * 2)
     iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
