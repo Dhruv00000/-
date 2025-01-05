@@ -2,7 +2,7 @@ use std::time::{Duration, Instant};
 
 fn main() {
 
-    let mut iterator: f64 = 0.0;
+    let mut iterator: u16 = 0; 
     let mut approximation_squared: f64 = 0.0;
     let mut approximation: f64;
     let mut previous_approximation: f64 = 0.0;
@@ -15,7 +15,7 @@ fn main() {
     loop {
 
         start_time = Instant::now();
-        approximation_squared += (f64::powf(-1.0, iterator) / (iterator + 1.0)) * inner_summation_loop(iterator as u16);
+        approximation_squared += (f64::powf(-1.0, iterator as f64) / (iterator+ 1) as f64) * inner_summation_loop(iterator);
         approximation = f64::powf(approximation_squared, 0.5) * 4.0;
         iteration_time = start_time.elapsed(); // only the mathematical computations are considered in the total computation time, and everything else like calculating the deviation and accuracy is not considered.
 
