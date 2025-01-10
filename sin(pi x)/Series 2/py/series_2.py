@@ -2,6 +2,7 @@ from decimal import Decimal
 from time import perf_counter
 
 k: int = 0
+approximationSquared: float = 0
 approximation: Decimal = 0
 previous: Decimal = 0
 finalAccuracy: int = 0
@@ -9,14 +10,17 @@ totalComputationTime: float = 0
 iterationStartTime: float = 0
 iterationEndTime: float = 0
 
-def approximationFunction(num: int) -> Decimal:
-    return Decimal(pow(-1, num) / (num + 1/2))
+def approximationSquaredFunction(num: int) -> float:
+    return 1 / pow(num + 1/2, 2)
 
 while True:
 
     iterationStartTime = perf_counter()
-    approximation += approximationFunction(k)
-    if k != 0: approximation += approximationFunction(-k)
+
+    approximationSquared += 1 / pow(k + 1/2, 2)
+    if k != 0: approximationSquared += 1 / pow(1/2 - k, 2)
+    approximation = Decimal(pow(approximationSquared, 1/2))
+
     iterationEndTime = perf_counter()
 
     print(f"\nIteration {k + 1}")
