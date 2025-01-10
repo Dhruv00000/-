@@ -24,7 +24,7 @@ def epsilonModified(n) -> int:
             n = n // i
             PrimeFactorCount += 1
         if n % i == 0:
-            PrimeFactorCount = 0
+            PrimeFactorCount = 0 # Ensures that no prime factor is repeated.
     
     if n % 2 == 0:
         PrimeFactorCount = 0
